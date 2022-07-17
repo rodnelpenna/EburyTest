@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Trade" icon-name="standard:change_record_type">   
+      <div class="slds-m-around_large">
+        <template if:true={trades}>
+          <lightning-datatable 
+            key-field="Id" 
+            data={trades}
+            columns={columns}>
+          </lightning-datatable>
+        </template>
+      </div>
+    </lightning-card>    
+</template>
