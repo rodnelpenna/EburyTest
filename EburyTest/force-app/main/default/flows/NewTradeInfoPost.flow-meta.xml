@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <name>Trade_Info</name>
+        <label>Trade Info</label>
+        <locationX>176</locationX>
+        <locationY>455</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <flowTransactionModel>CurrentTransaction</flowTransactionModel>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <elementReference>TradeInfo</elementReference>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>Trade_Reviewers_Group.Id</elementReference>
+            </value>
+        </inputParameters>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </actionCalls>
+    <apiVersion>55.0</apiVersion>
+    <constants>
+        <name>AllSalesId</name>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>0F97R000000LsduSAC</stringValue>
+        </value>
+    </constants>
+    <interviewLabel>NewTradeInfoPost {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>NewTradeInfoPost</label>
+    <processMetadataValues>
+        <name>BuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>CanvasMode</name>
+        <value>
+            <stringValue>AUTO_LAYOUT_CANVAS</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OriginBuilderType</name>
+        <value>
+            <stringValue>LightningFlowBuilder</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Trade_Reviewers_Group</name>
+        <label>Trade Reviewers Group</label>
+        <locationX>176</locationX>
+        <locationY>335</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Trade_Info</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Name</field>
+            <operator>EqualTo</operator>
+            <value>
+                <stringValue>Trade reviewers</stringValue>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>CollaborationGroup</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
+    <start>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Trade_Reviewers_Group</targetReference>
+        </connector>
+        <object>Trade__c</object>
+        <recordTriggerType>Create</recordTriggerType>
+        <triggerType>RecordAfterSave</triggerType>
+    </start>
+    <status>Active</status>
+    <textTemplates>
+        <name>TradeInfo</name>
+        <isViewedAsPlainText>true</isViewedAsPlainText>
+        <text>A new trade has been created with the following data:
+Sell Currency: {!$Record.Sell_Currency__c}
+Sell Amount: {!$Record.Sell_Amount__c}
+Buy Currency: {!$Record.Buy_Currency__c}
+Buy Amount: {!$Record.Buy_Amount__c}
+Rate: {!$Record.Rate__c}
+Booked Date: {!$Record.Date_Booked__c}</text>
+    </textTemplates>
+    <textTemplates>
+        <name>TradeText</name>
+        <isViewedAsPlainText>false</isViewedAsPlainText>
+        <text>&lt;p&gt;A new trade has been created with the following data:&lt;/p&gt;&lt;p&gt;Sell Currency: {!$Record.Sell_Currency__c}&lt;/p&gt;&lt;p&gt;Sell Amount: {!$Record.Sell_Amount__c}&lt;/p&gt;&lt;p&gt;Buy Currency:{!$Record.Buy_Currency__c}&lt;/p&gt;&lt;p&gt;Buy Amount: {{!$Record.Buy_Amount__c}}&lt;/p&gt;&lt;p&gt;Rate: {!$Record.Rate__c}&lt;/p&gt;&lt;p&gt;Booked Date: &lt;span style=&quot;background-color: rgb(255, 255, 255); color: rgb(68, 68, 68);&quot;&gt;{!$Record.Date_Booked__c}&lt;/span&gt;&lt;/p&gt;</text>
+    </textTemplates>
+</Flow>
