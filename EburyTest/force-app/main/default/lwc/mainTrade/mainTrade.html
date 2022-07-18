@@ -1,5 +1,10 @@
 <template>
-    <lightning-card title="Trade" icon-name="standard:change_record_type">   
+    <lightning-card title="Trade" icon-name="standard:change_record_type">
+      <div class="slds-clearfix">
+        <div class="slds-float_right">
+          <lightning-button variant="brand" class="slds-m-right_x-small" onclick={showCreateTab} label="New Trade"></lightning-button>
+        </div>
+      </div>      
       <div class="slds-m-around_large">
         <template if:true={trades}>
           <lightning-datatable 

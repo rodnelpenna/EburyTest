@@ -1,0 +1,35 @@
+<template>
+  <div class="slds-modal__content slds-p-around_medium">
+    <div class="slds-grid slds-gutters">
+      <div class="slds-col">
+        <lightning-combobox name="sell-currency" label="Sell Currency" value={sell_currency_value} placeholder="Select Sell Currency"
+          options={currency_picklist} onchange={handleSellChange}></lightning-combobox>
+      </div>
+      <div class="slds-col">
+        <lightning-textarea name="rate" label="Rate" value={rate} read-only="true" onchange={handleSellAmountChange}></lightning-textarea>
+      </div>
+      <div class="slds-col">
+        <lightning-combobox name="buy-currency" label="Buy Currency" value={buy_currency_value} placeholder="Select Buy Currency"
+          options={currency_picklist} onchange={handleBuyChange}></lightning-combobox>
+      </div>
+    </div>
+    <div class="slds-grid slds-grid_align-spread">
+      <div class="slds-col slds-m-left_x-small">
+        <lightning-input type="number" min="0" name="sell-amount" label="Sell Amount" value={sell_amount} onchange={handleSellAmountChange}></lightning-input>
+      </div>
+      <div class="slds-col slds-m-right_x-small">
+        <lightning-textarea name="buy-amount" label="Buy Amount" value={buy_amount} read-only="true"></lightning-textarea>
+      </div>
+    </div>
+    <div class="slds-clearfix">
+    <div class="slds-float_right">
+      <lightning-button variant="brand" class="slds-m-right_x-small" onclick={showMainTab} label="Cancel">
+      </lightning-button>
+    </div>
+    <div class="slds-float_left">
+      <lightning-button variant="brand" class="slds-m-left_x-small" onclick={createTradeHandler} label="Create">
+      </lightning-button>
+    </div>
+    </div>
+  </div>
+</template>
