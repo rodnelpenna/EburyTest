@@ -48,13 +48,17 @@ public with sharing class MainTradeHelper {
    @AuraEnabled
    public static List<String> getGlobalPicklist(){
       List<String>  values = new List<String>();
-      List<Schema.PicklistEntry> ple = Schema.getGlobalDescribe().get('Trade__c').getDescribe().fields.getMap().get('Sell_Currency__c').getDescribe().getPicklistValues();
-      for(Schema.PicklistEntry p : ple){
-         if(p.isActive()){
-            values.add(p.getLabel());
+      List<PicklistSource__mdt> picklistNames = [SELECT SObject_Field__c,SObject_Name__c FROM PicklistSource__mdt];
+      if(picklistNames.size() > 0){
+         List<Schema.PicklistEntry> ple = Schema.getGlobalDescribe().get(picklistNames[0].SObject_Name__c).getDescribe().fields.getMap().get(picklistNames[0].SObject_Field__c).getDescribe().getPicklistValues();
+         for(Schema.PicklistEntry p : ple){
+            if(p.isActive()){
+               values.add(p.getLabel());
+            }
          }
+         return values;
       }
-      return values;
+      return new List<String>();
    }
 
     @AuraEnabled
